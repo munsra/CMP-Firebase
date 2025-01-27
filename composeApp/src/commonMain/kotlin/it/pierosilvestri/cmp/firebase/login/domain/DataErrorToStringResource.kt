@@ -14,12 +14,17 @@ fun LoginError.toUiText(): UiText {
         LoginError.SignIn.NetworkError -> Res.string.error_network_error
         LoginError.SignIn.TooManyRequests -> Res.string.error_too_many_requests
         LoginError.SignIn.UnknownError -> Res.string.error_unknown_signin_error
+        LoginError.SignIn.EmptyFields -> Res.string.error_empty_fields
+        LoginError.SignIn.InvalidCredentials -> Res.string.error_invalid_credentials
+
         LoginError.SignUp.EmailAlreadyInUse -> Res.string.error_email_already_in_use
         LoginError.SignUp.WeakPassword -> Res.string.error_weak_password
         LoginError.SignUp.InvalidEmail -> Res.string.error_invalid_email
         LoginError.SignUp.OperationNotAllowed -> Res.string.error_operation_not_allowed
         LoginError.SignUp.NetworkError -> Res.string.error_network_error
         LoginError.SignUp.UnknownError -> Res.string.error_unknown_signup_error
+        LoginError.SignUp.EmptyFields -> Res.string.error_empty_fields
+        LoginError.SignUp.InvalidCredentials -> Res.string.error_invalid_credentials
     }
 
     return UiText.StringResourceId(stringRes)

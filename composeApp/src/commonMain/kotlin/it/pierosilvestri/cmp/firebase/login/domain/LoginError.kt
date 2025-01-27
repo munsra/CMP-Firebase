@@ -1,5 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.domain
 
+import dev.gitlive.firebase.FirebaseException
 import it.pierosilvestri.cmp.firebase.core.domain.Error
 
 sealed interface LoginError: Error {
@@ -10,7 +11,9 @@ sealed interface LoginError: Error {
         UserDisabled,
         NetworkError,
         TooManyRequests,
-        UnknownError
+        UnknownError,
+        EmptyFields,
+        InvalidCredentials
     }
 
     enum class SignUp : LoginError {
@@ -19,6 +22,10 @@ sealed interface LoginError: Error {
         InvalidEmail,
         OperationNotAllowed,
         NetworkError,
-        UnknownError
+        UnknownError,
+        EmptyFields,
+        InvalidCredentials
     }
 }
+
+expect fun handleLoginAuthErrorToLoginError(e: Exception): LoginError.SignIn

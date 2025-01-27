@@ -13,4 +13,6 @@
     <string name="error_weak_password">The password is too weak.</string>
     <string name="error_operation_not_allowed">Sign-up is currently disabled.</string>
     <string name="error_unknown_signup_error">An unknown error occurred during sign-up.</string>
+    <string name="error_empty_fields">Please fill in all the fields.</string>
+    <string name="error_invalid_credentials">The account doesn't exist. Please register the account.</string>
 </resources>

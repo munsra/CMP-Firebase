@@ -6,6 +6,7 @@ import it.pierosilvestri.cmp.firebase.login.domain.LoginRepository
 import kotlinx.coroutines.delay
 
 class MockLoginRepository: LoginRepository {
+
     override suspend fun login(email: String, password: String): Result<Unit, LoginError.SignIn> {
         delay(2000L)
         return try {

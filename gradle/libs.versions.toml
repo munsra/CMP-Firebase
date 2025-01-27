@@ -46,6 +46,8 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # Firebase BOM (Bill of Materials) for Android
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth"}
+
 gitlive-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "gitlive" }
 gitlive-firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "gitlive" }
 
