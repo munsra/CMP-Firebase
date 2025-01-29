@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 sealed interface Route {
 
     @Serializable
-    data object Graph: Route
+    data object LoginScreen: Route
 
     @Serializable
-    data object LoginScreen: Route
+    data object SignUpScreen: Route
 
     @Serializable
     data object HomeScreen: Route

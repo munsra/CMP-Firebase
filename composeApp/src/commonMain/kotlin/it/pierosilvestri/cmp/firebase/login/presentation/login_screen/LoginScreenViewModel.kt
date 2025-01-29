@@ -2,8 +2,10 @@ package it.pierosilvestri.cmp.firebase.login.presentation.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import it.pierosilvestri.cmp.firebase.core.domain.onError
 import it.pierosilvestri.cmp.firebase.core.domain.onSuccess
+import it.pierosilvestri.cmp.firebase.login.domain.LoginError
 import it.pierosilvestri.cmp.firebase.login.domain.LoginRepository
 import it.pierosilvestri.cmp.firebase.login.domain.toUiText
 import kotlinx.coroutines.channels.Channel
@@ -30,7 +32,30 @@ class LoginScreenViewModel(
         _state.value = _state.value.copy(password = password)
     }
 
+    private val _currentUser = MutableStateFlow<User?>(null)
+    val currentUser = _currentUser.asStateFlow()
+
+    init {
+        println("LoginViewModel has been launched")
+        viewModelScope.launch {
+            loginRepository.currentUser.collect {
+                _currentUser.value = it
+            }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
     fun onLogin() {
+        if(_state.value.email.isNullOrBlank()  || _state.value.password.isNullOrBlank()) {
+            _state.value = _state.value.copy(
+                errorMessage = LoginError.SignIn.EmptyFields.toUiText()
+            )
+            return
+        }
+
         _state.value = _state.value.copy(isLoading = true)
         viewModelScope.launch {
             loginRepository.login(
@@ -49,7 +74,15 @@ class LoginScreenViewModel(
     }
 
     fun onSignUp() {
+        viewModelScope.launch {
+            _uiEvent.send(LoginScreenEvent.GoToSignUpScreen)
+        }
+    }
 
+    fun onLoginWithGoogle() {
+        viewModelScope.launch {
+
+        }
     }
 
     fun onDismissError() {

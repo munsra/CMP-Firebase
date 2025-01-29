@@ -8,4 +8,5 @@ sealed interface LoginScreenAction {
     object Login : LoginScreenAction
     object SignUp : LoginScreenAction
     object DismissError: LoginScreenAction
+    object LoginWithGoogle : LoginScreenAction
 }

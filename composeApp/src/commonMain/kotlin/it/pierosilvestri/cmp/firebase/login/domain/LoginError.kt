@@ -1,6 +1,5 @@
 package it.pierosilvestri.cmp.firebase.login.domain
 
-import dev.gitlive.firebase.FirebaseException
 import it.pierosilvestri.cmp.firebase.core.domain.Error
 
 sealed interface LoginError: Error {
@@ -25,6 +24,10 @@ sealed interface LoginError: Error {
         UnknownError,
         EmptyFields,
         InvalidCredentials
+    }
+
+    enum class SignOut: LoginError {
+        UnknownError
     }
 }
 

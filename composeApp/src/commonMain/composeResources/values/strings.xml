@@ -15,4 +15,7 @@
     <string name="error_unknown_signup_error">An unknown error occurred during sign-up.</string>
     <string name="error_empty_fields">Please fill in all the fields.</string>
     <string name="error_invalid_credentials">The account doesn't exist. Please register the account.</string>
+    <string name="google_login_label">Login with Google</string>
+    <string name="facebook_login_label">Login with Facebook</string>
+    <string name="logout_error_dialog_title">Logout Error.Please check connection.</string>">
 </resources>

@@ -31,13 +31,19 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cmp_firebase.composeapp.generated.resources.Res
+import cmp_firebase.composeapp.generated.resources.google_brands_solid
+import cmp_firebase.composeapp.generated.resources.google_login_label
 import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.ErrorPopup
 import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
+import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.components.SocialButton
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LoginScreenRoot(
     viewModel: LoginScreenViewModel = viewModel(),
     onLoginSuccess: () -> Unit,
+    onSignUp: () -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -47,7 +53,7 @@ fun LoginScreenRoot(
                 is LoginScreenEvent.GoToHomeScreen -> {
                     onLoginSuccess()
                 }
-                is LoginScreenEvent.GoToSignUpScreen -> TODO()
+                is LoginScreenEvent.GoToSignUpScreen -> onSignUp()
             }
         }
     }
@@ -59,9 +65,10 @@ fun LoginScreenRoot(
                 is LoginScreenAction.EmailChanged -> viewModel.onEmailChange(action.email)
                 is LoginScreenAction.PasswordChanged -> viewModel.onPasswordChange(action.password)
                 LoginScreenAction.Login -> viewModel.onLogin()
-                LoginScreenAction.SignUp -> TODO()
+                LoginScreenAction.SignUp -> viewModel.onSignUp()
                 LoginScreenAction.TogglePasswordVisibility -> viewModel.onTogglePasswordVisibility()
                 LoginScreenAction.DismissError -> viewModel.onDismissError()
+                LoginScreenAction.LoginWithGoogle -> viewModel.onLoginWithGoogle()
             }
         }
     )
@@ -128,8 +135,18 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            SocialButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { onAction(LoginScreenAction.LoginWithGoogle) },
+                iconResId = Res.drawable.google_brands_solid,
+                tint = Color.Red,
+                text = stringResource(Res.string.google_login_label)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
             // Sign Up Button
-            TextButton(onClick = { /* Navigate to Sign Up Screen */ }) {
+            TextButton(onClick = { onAction(LoginScreenAction.SignUp) }) {
                 Text("Don't have an account? Sign Up")
             }
 

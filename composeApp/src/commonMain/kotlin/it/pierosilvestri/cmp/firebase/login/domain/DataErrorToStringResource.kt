@@ -25,6 +25,8 @@ fun LoginError.toUiText(): UiText {
         LoginError.SignUp.UnknownError -> Res.string.error_unknown_signup_error
         LoginError.SignUp.EmptyFields -> Res.string.error_empty_fields
         LoginError.SignUp.InvalidCredentials -> Res.string.error_invalid_credentials
+
+        LoginError.SignOut.UnknownError -> Res.string.logout_error_dialog_title
     }
 
     return UiText.StringResourceId(stringRes)
