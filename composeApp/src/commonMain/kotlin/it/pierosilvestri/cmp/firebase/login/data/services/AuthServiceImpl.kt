@@ -23,8 +23,8 @@ class AuthServiceImpl(
     override val isAuthenticated: Boolean
         get() = auth.currentUser != null && auth.currentUser?.isAnonymous == false
 
-    override val currentUser: Flow<User> =
-        auth.authStateChanged.map { it?.let { User(it.uid, it.isAnonymous) } ?: User() }
+    override val currentUser: Flow<User?> =
+        auth.authStateChanged.map { it?.let { User(it.uid, it.isAnonymous) } }
 
     private suspend fun launchWithAwait(block : suspend  () -> Unit) {
         scope.async {

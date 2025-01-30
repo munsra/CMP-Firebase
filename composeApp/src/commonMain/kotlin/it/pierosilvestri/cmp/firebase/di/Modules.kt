@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.bind
+import it.pierosilvestri.cmp.firebase.login.presentation.splash_screen.SplashScreenViewModel
 
 
 val appModule = module {
@@ -33,6 +33,7 @@ val appModule = module {
 
     singleOf(::LoginRepositoryImpl).bind<LoginRepository>()
 
+    viewModelOf(::SplashScreenViewModel)
     viewModelOf(::LoginScreenViewModel)
     viewModelOf(::HomeScreenViewModel)
 }

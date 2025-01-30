@@ -1,4 +1,4 @@
-package it.pierosilvestri.cmp.firebase.login.presentation.login_screen.components
+package it.pierosilvestri.cmp.firebase.login.presentation.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable

@@ -6,7 +6,7 @@ import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
 interface LoginRepository {
-    val currentUser: Flow<User>
+    val currentUser: Flow<User?>
     suspend fun login(email: String, password: String): Result<User, LoginError.SignIn>
     suspend fun signUp(email: String, password: String): Result<User, LoginError.SignUp>
     suspend fun signOut(): Result<Unit, LoginError.SignOut>

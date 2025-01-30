@@ -12,7 +12,7 @@ class LoginRepositoryImpl(
     private val auth: AuthService
 ) : LoginRepository {
 
-    override val currentUser: Flow<User>
+    override val currentUser: Flow<User?>
         get() = auth.currentUser
 
     override suspend fun login(email: String, password: String): Result<User, LoginError.SignIn> {

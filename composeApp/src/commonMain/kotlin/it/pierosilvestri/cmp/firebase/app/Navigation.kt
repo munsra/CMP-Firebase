@@ -15,6 +15,7 @@ import it.pierosilvestri.cmp.firebase.login.data.repository.mock.MockLoginReposi
 import it.pierosilvestri.cmp.firebase.login.data.services.AuthServiceImpl
 import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenRoot
 import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenViewModel
+import it.pierosilvestri.cmp.firebase.login.presentation.splash_screen.SplashScreenRoot
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -22,13 +23,26 @@ fun Navigation() {
     val navController = rememberNavController();
     NavHost(
         navController = navController,
-        startDestination = Route.LoginScreen
+        startDestination = Route.SplashScreen
     ) {
 
+        composable<Route.SplashScreen> {
+            SplashScreenRoot(
+                onUserNotLogged = {
+                    navController.navigate(Route.LoginScreen) {
+                        popUpTo(Route.SplashScreen) { inclusive = true }
+                    }
+                },
+                onUserLogged = {
+                    navController.navigate(Route.HomeScreen) {
+                        popUpTo(Route.SplashScreen) { inclusive = true }
+                    }
+                }
+            )
+        }
+
         composable<Route.LoginScreen>  {
-            val viewModel = koinViewModel<LoginScreenViewModel>()
             LoginScreenRoot(
-                viewModel = viewModel,
                 onLoginSuccess = {
                     navController.navigate(Route.HomeScreen) {
                         popUpTo(Route.LoginScreen) { inclusive = true }
@@ -48,7 +62,6 @@ fun Navigation() {
         }
         composable<Route.HomeScreen> {
             HomeScreenRoot(
-                viewModel = koinViewModel<HomeScreenViewModel>(),
                 onLogout = {
                     navController.navigate(Route.LoginScreen) {
                         popUpTo(Route.HomeScreen) { inclusive = true }

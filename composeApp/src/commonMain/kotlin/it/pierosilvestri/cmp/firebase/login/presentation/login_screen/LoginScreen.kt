@@ -36,12 +36,13 @@ import cmp_firebase.composeapp.generated.resources.google_brands_solid
 import cmp_firebase.composeapp.generated.resources.google_login_label
 import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.ErrorPopup
 import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
-import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.components.SocialButton
+import it.pierosilvestri.cmp.firebase.login.presentation.components.SocialButton
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun LoginScreenRoot(
-    viewModel: LoginScreenViewModel = viewModel(),
+    viewModel: LoginScreenViewModel = koinViewModel(),
     onLoginSuccess: () -> Unit,
     onSignUp: () -> Unit,
 ) {

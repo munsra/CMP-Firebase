@@ -32,22 +32,6 @@ class LoginScreenViewModel(
         _state.value = _state.value.copy(password = password)
     }
 
-    private val _currentUser = MutableStateFlow<User?>(null)
-    val currentUser = _currentUser.asStateFlow()
-
-    init {
-        println("LoginViewModel has been launched")
-        viewModelScope.launch {
-            loginRepository.currentUser.collect {
-                _currentUser.value = it
-            }
-        }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
-
     fun onLogin() {
         if(_state.value.email.isNullOrBlank()  || _state.value.password.isNullOrBlank()) {
             _state.value = _state.value.copy(

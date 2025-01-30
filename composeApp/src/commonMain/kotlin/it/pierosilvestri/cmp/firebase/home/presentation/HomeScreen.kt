@@ -36,12 +36,13 @@ import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.ErrorPopup
 import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
 import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenAction
 import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenEvent
-import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.components.SocialButton
+import it.pierosilvestri.cmp.firebase.login.presentation.components.SocialButton
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreenRoot(
-    viewModel: HomeScreenViewModel = viewModel(),
+    viewModel: HomeScreenViewModel = koinViewModel(),
     onLogout: () -> Unit,
     modifier: Modifier = Modifier
 ) {
