@@ -12,14 +12,26 @@ class MockAuthRepository: AuthRepository {
 
     override val currentUser: Flow<User>
         get() = flow {
-            emit(User())
+            emit(User(
+                id = "1",
+                isAuthenticated = true,
+                email = "james.a.garfield@examplepetstore.com",
+                displayName = "John Doe",
+                photoUrl = null
+            ))
         }
 
     override suspend fun login(email: String, password: String): Result<User, AuthError.SignIn> {
         delay(2000L)
         return try {
             // Firebase authentication logic here
-            Result.Success(User())
+            Result.Success(User(
+                id = "1",
+                isAuthenticated = true,
+                email = "william.henry.harrison@example-pet-store.com",
+                displayName = "John Doe",
+                photoUrl = null
+            ))
         } catch (e: Exception) {
             Result.Error(AuthError.SignIn.UnknownError)
         }
@@ -36,15 +48,27 @@ class MockAuthRepository: AuthRepository {
     }
 
     override suspend fun signOut(): Result<Unit, AuthError.SignOut> {
-        TODO("Not yet implemented")
+        return Result.Success(Unit)
     }
 
     override suspend fun loginWithGoogle(): Result<User, AuthError.SignIn> {
-        TODO("Not yet implemented")
+        return Result.Success(User(
+            id = "1",
+            isAuthenticated = true,
+            email = "william.henry.harrison@example-pet-store.com",
+            displayName = "John Doe",
+            photoUrl = null
+        ))
     }
 
     override suspend fun signUpWithGoogle(): Result<User, AuthError.SignUp> {
-        TODO("Not yet implemented")
+        return Result.Success(User(
+            id = "1",
+            isAuthenticated = true,
+            email = "william.henry.harrison@example-pet-store.com",
+            displayName = "John Doe",
+            photoUrl = null
+        ))
     }
 
 }

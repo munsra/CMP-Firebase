@@ -2,6 +2,7 @@ package it.pierosilvestri.cmp.firebase.login.data.repository
 
 import it.pierosilvestri.cmp.firebase.core.domain.Result
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
+import it.pierosilvestri.cmp.firebase.login.data.mapper.toUser
 import it.pierosilvestri.cmp.firebase.login.domain.services.FirebaseService
 import it.pierosilvestri.cmp.firebase.login.domain.AuthError
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
@@ -21,8 +22,15 @@ class AuthRepositoryImpl(
             if (email.isBlank() || password.isBlank()) {
                 return Result.Error(AuthError.SignIn.EmptyFields)
             }
-            auth.authenticate(email, password)
-            return Result.Success(User())
+            val user = auth.authenticate(email, password)
+            if(user == null){
+                return Result.Error(AuthError.SignIn.UnknownError)
+            }
+
+            if(!user.isEmailVerified){
+                return Result.Error(AuthError.SignIn.NotVerified)
+            }
+            return Result.Success(user.toUser())
         } catch (e: Exception) {
             return Result.Error(handleSignInErrorToAuthError(e))
         }

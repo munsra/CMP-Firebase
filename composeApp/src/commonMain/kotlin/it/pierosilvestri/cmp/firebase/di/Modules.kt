@@ -38,6 +38,12 @@ val appModule = module {
 
     singleOf(::AuthRepositoryImpl).bind<AuthRepository>()
 
+    // Provide EmailValidationUseCase
+    factory { ValidateEmailUseCase() }
+
+    // Provide PasswordValidationUseCase
+    factory { ValidatePasswordUseCase() }
+
     // Provide LoginUserUseCase
     factory { SignUpUseCase(get(), get(), get()) }
 

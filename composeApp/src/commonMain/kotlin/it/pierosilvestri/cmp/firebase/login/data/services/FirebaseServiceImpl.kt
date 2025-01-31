@@ -26,23 +26,26 @@ class FirebaseServiceImpl(
         get() = auth.currentUser != null && auth.currentUser?.isAnonymous == false
 
     override val currentUser: Flow<User?> =
-        auth.authStateChanged.map { it?.let { User(it.uid, it.isAnonymous) } }
+        auth.authStateChanged.map { it?.let { User(it.uid, it.isEmailVerified, it.email ?: "", it.displayName ?: "", it.photoURL ?: "") } }
 
     private suspend fun launchWithAwait(block : suspend  () -> Unit) {
         scope.async {
             block()
         }.await()
     }
-    override suspend fun authenticate(email: String, password: String) {
+    override suspend fun authenticate(email: String, password: String): FirebaseUser? {
+        var firebaseUser: FirebaseUser? = null
         launchWithAwait {
-            auth.signInWithEmailAndPassword(email, password)
+            val authResult: AuthResult = auth.signInWithEmailAndPassword(email, password)
+            firebaseUser = authResult.user
         }
+        return firebaseUser
     }
     override suspend fun createUser(email: String, password: String) {
         launchWithAwait {
-            val authReasult: AuthResult = auth.createUserWithEmailAndPassword(email, password)
-            if(authReasult.user != null){
-                sendVerificationEmail(authReasult.user!!)
+            val authResult: AuthResult = auth.createUserWithEmailAndPassword(email, password)
+            if(authResult.user != null){
+                sendVerificationEmail(authResult.user!!)
             }
         }
     }
@@ -54,17 +57,11 @@ class FirebaseServiceImpl(
         }
 
         auth.signOut()
-
-        //create  new user anonymous session
     }
 
     override suspend fun sendVerificationEmail(user: FirebaseUser) {
         launchWithAwait {
-            try{
-                user.sendEmailVerification()
-            }catch (e: Exception){
-                e.printStackTrace()
-            }
+            user.sendEmailVerification()
         }
     }
 }

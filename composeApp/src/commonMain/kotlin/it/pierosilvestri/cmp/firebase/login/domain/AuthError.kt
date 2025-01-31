@@ -21,7 +21,8 @@ sealed interface AuthError: Error {
         TooManyRequests,
         UnknownError,
         EmptyFields,
-        InvalidCredentials
+        InvalidCredentials,
+        NotVerified
     }
 
     enum class SignUp : AuthError {

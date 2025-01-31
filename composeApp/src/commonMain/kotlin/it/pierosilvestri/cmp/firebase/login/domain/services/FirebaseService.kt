@@ -11,7 +11,7 @@ interface FirebaseService {
 
     val currentUser: Flow<User?>
 
-    suspend fun authenticate(email: String, password: String)
+    suspend fun authenticate(email: String, password: String): FirebaseUser?
     suspend fun createUser(email: String, password: String)
 
     suspend fun signOut()

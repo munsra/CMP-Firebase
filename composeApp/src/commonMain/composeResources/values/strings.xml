@@ -29,5 +29,6 @@
     <string name="logout_error_dialog_title">Logout Error.Please check connection.</string>">
     <string name="sign_up_success_dialog_title">Sign Up Success</string>
     <string name="sign_up_success_dialog_message">You have successfully signed up.\nPlease check your email for validation.\nYou will be redirected to login screen.</string>"
+    <string name="error_user_not_verified">User not verified.\nPlease check your email to verify your account.</string>
     <string name="error_unknown_error">Error occurred.</string>
 </resources>

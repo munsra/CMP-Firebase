@@ -13,7 +13,7 @@ import it.pierosilvestri.cmp.firebase.login.presentation.signup_screen.SignUpScr
 
 @Composable
 @Preview
-fun PreviewLoginScreen(modifier: Modifier = Modifier) {
+fun PreviewLoginScreen() {
     AppTheme(
         dynamicColor = false
     ) {

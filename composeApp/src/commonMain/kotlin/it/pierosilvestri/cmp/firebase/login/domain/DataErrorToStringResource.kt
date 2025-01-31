@@ -16,6 +16,7 @@ fun AuthError.toUiText(): UiText {
         AuthError.SignIn.UnknownError -> Res.string.error_unknown_signin_error
         AuthError.SignIn.EmptyFields -> Res.string.error_empty_fields
         AuthError.SignIn.InvalidCredentials -> Res.string.error_invalid_credentials
+        AuthError.SignIn.NotVerified -> Res.string.error_user_not_verified
 
         AuthError.SignUp.EmailAlreadyInUse -> Res.string.error_email_already_in_use
         AuthError.SignUp.WeakPassword -> Res.string.error_weak_password

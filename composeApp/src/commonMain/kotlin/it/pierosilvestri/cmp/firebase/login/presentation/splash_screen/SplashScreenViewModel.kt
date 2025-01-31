@@ -37,8 +37,8 @@ class SplashScreenViewModel(
                         isLoading = false,
                     )
                 }
-                println("UTENTE: ${it.toString()}")
-                if(it != null) {
+
+                if(it != null && it.isAuthenticated) {
                     _uiEvent.trySend(SplashScreenEvent.GoToHomeScreen)
                 }else {
                     _uiEvent.trySend(SplashScreenEvent.GoToLoginScreen)
