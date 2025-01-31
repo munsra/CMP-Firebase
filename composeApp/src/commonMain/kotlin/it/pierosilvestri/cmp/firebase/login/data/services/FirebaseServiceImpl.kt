@@ -1,10 +1,12 @@
 package it.pierosilvestri.cmp.firebase.login.data.services
 
 import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.AuthResult
 import dev.gitlive.firebase.auth.FirebaseAuth
+import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
-import it.pierosilvestri.cmp.firebase.login.domain.AuthService
+import it.pierosilvestri.cmp.firebase.login.domain.services.FirebaseService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -12,10 +14,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class AuthServiceImpl(
+class FirebaseServiceImpl(
     val auth: FirebaseAuth = Firebase.auth,
     val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-) : AuthService {
+) : FirebaseService {
 
     override val currentUserId: String
         get() = auth.currentUser?.uid.toString()
@@ -37,8 +39,11 @@ class AuthServiceImpl(
         }
     }
     override suspend fun createUser(email: String, password: String) {
-        val result = launchWithAwait {
-            auth.createUserWithEmailAndPassword(email, password)
+        launchWithAwait {
+            val authReasult: AuthResult = auth.createUserWithEmailAndPassword(email, password)
+            if(authReasult.user != null){
+                sendVerificationEmail(authReasult.user!!)
+            }
         }
     }
 
@@ -51,5 +56,15 @@ class AuthServiceImpl(
         auth.signOut()
 
         //create  new user anonymous session
+    }
+
+    override suspend fun sendVerificationEmail(user: FirebaseUser) {
+        launchWithAwait {
+            try{
+                user.sendEmailVerification()
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
     }
 }

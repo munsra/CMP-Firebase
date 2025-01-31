@@ -2,8 +2,7 @@ package it.pierosilvestri.cmp.firebase.login.presentation.splash_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import it.pierosilvestri.cmp.firebase.login.domain.LoginRepository
-import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenState
+import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SplashScreenViewModel(
-    private val loginRepository: LoginRepository
+    private val authRepository: AuthRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(SplashScreenState())
@@ -32,12 +31,13 @@ class SplashScreenViewModel(
             )
         }
         viewModelScope.launch {
-            loginRepository.currentUser.collect {
+            authRepository.currentUser.collect {
                 _state.update {
                     it.copy(
                         isLoading = false,
                     )
                 }
+                println("UTENTE: ${it.toString()}")
                 if(it != null) {
                     _uiEvent.trySend(SplashScreenEvent.GoToHomeScreen)
                 }else {

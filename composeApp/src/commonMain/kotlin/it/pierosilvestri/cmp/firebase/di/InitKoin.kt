@@ -1,4 +1,4 @@
-package it.pierosilvestri.bookpedia.di
+package it.pierosilvestri.cmp.firebase.di
 
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration

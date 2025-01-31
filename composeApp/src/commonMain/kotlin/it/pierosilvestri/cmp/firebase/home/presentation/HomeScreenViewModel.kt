@@ -2,13 +2,13 @@ package it.pierosilvestri.cmp.firebase.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import it.pierosilvestri.cmp.firebase.login.domain.LoginRepository
+import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class HomeScreenViewModel(
-    private val loginRepository: LoginRepository,
+    private val authRepository: AuthRepository,
 ): ViewModel() {
 
     private val _uiEvent = Channel<HomeScreenEvent>()
@@ -16,7 +16,7 @@ class HomeScreenViewModel(
 
     fun signOut(){
         viewModelScope.launch {
-            loginRepository.signOut()
+            authRepository.signOut()
             _uiEvent.send(HomeScreenEvent.GoBackToLoginScreen)
         }
     }

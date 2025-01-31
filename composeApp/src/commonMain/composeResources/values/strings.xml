@@ -2,20 +2,32 @@
 <resources>
     <string name="loading_message">Loading...</string>
     <string name="error_dialog_title">Error</string>
-    <string name="error_invalid_email">Invalid email format.</string>
     <string name="error_user_not_found">No user found with the provided email.</string>
-    <string name="error_wrong_password">The password is incorrect.</string>
     <string name="error_user_disabled">The user account has been disabled.</string>
     <string name="error_network_error">Network error occurred.</string>
     <string name="error_too_many_requests">Too many requests. Try again later.</string>
     <string name="error_unknown_signin_error">An unknown error occurred during sign-in.</string>
+
+    <string name="error_invalid_email">Invalid email format.</string>
     <string name="error_email_already_in_use">The email address is already in use by another account.</string>
+    <string name="error_email_empty">Email cannot be null.</string>
+
     <string name="error_weak_password">The password is too weak.</string>
+    <string name="error_password_is_empty">Please enter a password.</string>
+    <string name="error_password_is_too_short">Password must be at least 8 characters long.</string>
+    <string name="error_passowrd_does_not_contain_uppercase">Password must contain at least one uppercase letter.</string>
+    <string name="error_passowrd_does_not_contain_number">Password must contain at least one number.</string>
+    <string name="error_passowrd_does_not_contain_special_character">Password must contain at least one special character.</string>
+    <string name="error_wrong_password">The password is incorrect.</string>
+
     <string name="error_operation_not_allowed">Sign-up is currently disabled.</string>
     <string name="error_unknown_signup_error">An unknown error occurred during sign-up.</string>
     <string name="error_empty_fields">Please fill in all the fields.</string>
-    <string name="error_invalid_credentials">The account doesn't exist. Please register the account.</string>
+    <string name="error_invalid_credentials">The credential are not valid.</string>
     <string name="google_login_label">Login with Google</string>
     <string name="facebook_login_label">Login with Facebook</string>
     <string name="logout_error_dialog_title">Logout Error.Please check connection.</string>">
+    <string name="sign_up_success_dialog_title">Sign Up Success</string>
+    <string name="sign_up_success_dialog_message">You have successfully signed up.\nPlease check your email for validation.\nYou will be redirected to login screen.</string>"
+    <string name="error_unknown_error">Error occurred.</string>
 </resources>

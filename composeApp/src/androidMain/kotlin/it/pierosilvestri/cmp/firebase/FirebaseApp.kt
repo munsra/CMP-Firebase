@@ -1,7 +1,7 @@
 package it.pierosilvestri.cmp.firebase
 
 import android.app.Application
-import it.pierosilvestri.bookpedia.di.initKoin
+import it.pierosilvestri.cmp.firebase.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
 class FirebaseApp: Application() {
