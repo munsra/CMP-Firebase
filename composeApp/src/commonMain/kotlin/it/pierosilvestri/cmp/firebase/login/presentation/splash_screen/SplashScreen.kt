@@ -28,7 +28,10 @@ fun SplashScreenRoot(
         viewModel.uiEvent.collect {
             when (it) {
                 is SplashScreenEvent.GoToHomeScreen -> onUserLogged()
-                is SplashScreenEvent.GoToLoginScreen -> onUserNotLogged()
+                is SplashScreenEvent.GoToLoginScreen -> {
+                    println("MY_APP_TEST SPASHSCREEN user NOT aht. GoTo")
+                    onUserNotLogged()
+                }
             }
         }
     }
@@ -52,7 +55,7 @@ fun SplashScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                "Splash Screen"
+                "Splash Screen test"
             )
             if(state.isLoading){
                 LoadingPopup()

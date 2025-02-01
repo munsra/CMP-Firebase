@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import it.pierosilvestri.cmp.firebase.home.presentation.HomeScreenRoot
 import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenRoot
 import it.pierosilvestri.cmp.firebase.login.presentation.splash_screen.SplashScreenRoot
+import it.pierosilvestri.cmp.firebase.todo.presentation.TodoScreenRoot
 
 @Composable
 fun Navigation() {
@@ -55,9 +56,24 @@ fun Navigation() {
         }
         composable<Route.HomeScreen> {
             HomeScreenRoot(
-                onLogout = {
+                goBack = {
                     navController.navigate(Route.LoginScreen) {
                         popUpTo(Route.HomeScreen) { inclusive = true }
+                    }
+                },
+                goToNextPage = {
+                    navController.navigate(Route.TodoScreen) {
+                        popUpTo(Route.HomeScreen) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable<Route.TodoScreen> {
+            TodoScreenRoot(
+                goBack = {
+                    navController.navigate(Route.HomeScreen) {
+                        popUpTo(Route.TodoScreen) { inclusive = true }
                     }
                 }
             )

@@ -1,10 +1,10 @@
-package it.pierosilvestri.cmp.firebase.login.domain.services
+package it.pierosilvestri.cmp.firebase.core.domain.services
 
 import dev.gitlive.firebase.auth.FirebaseUser
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
-interface FirebaseService {
+interface FirebaseAuthService {
 
     val currentUserId: String
     val isAuthenticated: Boolean

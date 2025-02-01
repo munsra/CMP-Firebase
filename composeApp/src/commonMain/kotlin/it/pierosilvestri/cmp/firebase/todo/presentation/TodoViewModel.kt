@@ -1,24 +1,20 @@
-package it.pierosilvestri.cmp.firebase.home.presentation
+package it.pierosilvestri.cmp.firebase.todo.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import it.pierosilvestri.cmp.firebase.home.presentation.HomeScreenEvent
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class HomeScreenViewModel(
+class TodoViewModel(
     private val authRepository: AuthRepository,
 ): ViewModel() {
 
-    private val _state = MutableStateFlow(HomeScreenState())
+    private val _state = MutableStateFlow(TodoScreenState())
     val state = _state.asStateFlow()
-
-    private val _uiEvent = Channel<HomeScreenEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
 
     fun signOut(){
         _state.update {
@@ -28,7 +24,6 @@ class HomeScreenViewModel(
         }
         viewModelScope.launch {
             authRepository.signOut()
-            _uiEvent.send(HomeScreenEvent.GoBackToLoginScreen)
         }
     }
 
@@ -48,9 +43,7 @@ class HomeScreenViewModel(
         }
     }
 
-    fun goToTodoListScreen(){
-        viewModelScope.launch {
-            _uiEvent.send(HomeScreenEvent.GoToTodoListScreen)
-        }
+    fun addNote(){
+
     }
 }

@@ -3,10 +3,9 @@ package it.pierosilvestri.cmp.firebase.core.domain.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class User(
+data class Note(
     val id: String,
-    val isAuthenticated: Boolean,
-    val email: String,
-    val displayName: String,
-    val photoUrl: String?,
+    val content: String,
+    val isCompleted: Boolean,
+    val timestamp: Long
 )

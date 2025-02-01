@@ -3,8 +3,8 @@ package it.pierosilvestri.cmp.firebase.di
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.auth
-import it.pierosilvestri.cmp.firebase.login.domain.services.FirebaseService
-import it.pierosilvestri.cmp.firebase.login.data.services.FirebaseServiceImpl
+import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseAuthService
+import it.pierosilvestri.cmp.firebase.core.data.services.FirebaseAuthServiceImpl
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
 import it.pierosilvestri.cmp.firebase.login.data.repository.AuthRepositoryImpl
 import org.koin.core.module.dsl.singleOf
@@ -22,11 +22,12 @@ import it.pierosilvestri.cmp.firebase.login.domain.use_case.LoginUserUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.SignUpUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.ValidateEmailUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.ValidatePasswordUseCase
+import it.pierosilvestri.cmp.firebase.todo.presentation.TodoViewModel
 
 
 val appModule = module {
-    single<FirebaseService> {
-        FirebaseServiceImpl(
+    single<FirebaseAuthService> {
+        FirebaseAuthServiceImpl(
             auth = get(),
             scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         )
@@ -54,6 +55,7 @@ val appModule = module {
     viewModelOf(::LoginScreenViewModel)
     viewModelOf(::SignUpScreenViewModel)
     viewModelOf(::HomeScreenViewModel)
+    viewModelOf(::TodoViewModel)
 
 
 }

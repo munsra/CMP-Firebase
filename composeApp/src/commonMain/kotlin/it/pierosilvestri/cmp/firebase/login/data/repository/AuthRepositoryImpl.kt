@@ -3,7 +3,7 @@ package it.pierosilvestri.cmp.firebase.login.data.repository
 import it.pierosilvestri.cmp.firebase.core.domain.Result
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import it.pierosilvestri.cmp.firebase.login.data.mapper.toUser
-import it.pierosilvestri.cmp.firebase.login.domain.services.FirebaseService
+import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseAuthService
 import it.pierosilvestri.cmp.firebase.login.domain.AuthError
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
 import it.pierosilvestri.cmp.firebase.login.domain.handleSignInErrorToAuthError
@@ -11,7 +11,7 @@ import it.pierosilvestri.cmp.firebase.login.domain.handleSignUpErrorToAuthError
 import kotlinx.coroutines.flow.Flow
 
 class AuthRepositoryImpl(
-    private val auth: FirebaseService
+    private val auth: FirebaseAuthService
 ) : AuthRepository {
 
     override val currentUser: Flow<User?>

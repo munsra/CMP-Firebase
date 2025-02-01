@@ -1,4 +1,4 @@
-package it.pierosilvestri.cmp.firebase.login.data.services
+package it.pierosilvestri.cmp.firebase.core.data.services
 
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.AuthResult
@@ -6,7 +6,7 @@ import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
-import it.pierosilvestri.cmp.firebase.login.domain.services.FirebaseService
+import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseAuthService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -14,10 +14,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class FirebaseServiceImpl(
+class FirebaseAuthServiceImpl(
     val auth: FirebaseAuth = Firebase.auth,
     val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-) : FirebaseService {
+) : FirebaseAuthService {
 
     override val currentUserId: String
         get() = auth.currentUser?.uid.toString()

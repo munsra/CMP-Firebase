@@ -16,4 +16,8 @@ sealed interface Route {
     @Serializable
     data object HomeScreen: Route
 
+    @Serializable
+    data object TodoScreen: Route
+
+
 }

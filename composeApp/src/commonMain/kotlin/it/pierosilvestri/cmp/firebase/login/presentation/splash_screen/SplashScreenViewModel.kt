@@ -39,9 +39,11 @@ class SplashScreenViewModel(
                 }
 
                 if(it != null && it.isAuthenticated) {
-                    _uiEvent.trySend(SplashScreenEvent.GoToHomeScreen)
+                    println("Autorizzato")
+                    _uiEvent.send(SplashScreenEvent.GoToHomeScreen)
                 }else {
-                    _uiEvent.trySend(SplashScreenEvent.GoToLoginScreen)
+                    println("QUA ARRIVO")
+                    _uiEvent.send(SplashScreenEvent.GoToLoginScreen)
                 }
             }
         }
