@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class MockAuthRepository: AuthRepository {
+    override val currentUserId: String
+        get() = "1"
 
     override val currentUser: Flow<User>
         get() = flow {

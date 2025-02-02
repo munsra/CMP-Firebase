@@ -22,7 +22,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun TodoScreenRoot(
     goBack: () -> Unit,
-    viewModel: TodoViewModel = koinViewModel(),
+    viewModel: TodoScreenViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

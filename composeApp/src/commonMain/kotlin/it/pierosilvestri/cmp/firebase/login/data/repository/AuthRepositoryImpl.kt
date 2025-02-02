@@ -14,6 +14,9 @@ class AuthRepositoryImpl(
     private val auth: FirebaseAuthService
 ) : AuthRepository {
 
+    override val currentUserId: String
+        get() = auth.currentUserId
+
     override val currentUser: Flow<User?>
         get() = auth.currentUser
 

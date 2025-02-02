@@ -5,6 +5,8 @@ import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.auth
 import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseAuthService
 import it.pierosilvestri.cmp.firebase.core.data.services.FirebaseAuthServiceImpl
+import it.pierosilvestri.cmp.firebase.core.data.services.FirebaseFirestoreServiceImpl
+import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseFirestoreService
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
 import it.pierosilvestri.cmp.firebase.login.data.repository.AuthRepositoryImpl
 import org.koin.core.module.dsl.singleOf
@@ -22,7 +24,9 @@ import it.pierosilvestri.cmp.firebase.login.domain.use_case.LoginUserUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.SignUpUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.ValidateEmailUseCase
 import it.pierosilvestri.cmp.firebase.login.domain.use_case.ValidatePasswordUseCase
-import it.pierosilvestri.cmp.firebase.todo.presentation.TodoViewModel
+import it.pierosilvestri.cmp.firebase.todo.presentation.TodoScreenViewModel
+import it.pierosilvestri.cmp.firebase.todo.domain.repository.TodoRepository
+import it.pierosilvestri.cmp.firebase.todo.data.repository.TodoRepositoryImpl
 
 
 val appModule = module {
@@ -33,11 +37,16 @@ val appModule = module {
         )
     }
 
+    single<FirebaseFirestoreService> {
+        FirebaseFirestoreServiceImpl()
+    }
+
     single<FirebaseAuth> {
         Firebase.auth
     }
 
     singleOf(::AuthRepositoryImpl).bind<AuthRepository>()
+    singleOf(::TodoRepositoryImpl).bind<TodoRepository>()
 
     // Provide EmailValidationUseCase
     factory { ValidateEmailUseCase() }
@@ -55,7 +64,5 @@ val appModule = module {
     viewModelOf(::LoginScreenViewModel)
     viewModelOf(::SignUpScreenViewModel)
     viewModelOf(::HomeScreenViewModel)
-    viewModelOf(::TodoViewModel)
-
-
+    viewModelOf(::TodoScreenViewModel)
 }
