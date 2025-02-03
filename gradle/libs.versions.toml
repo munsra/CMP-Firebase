@@ -13,12 +13,13 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
 googleid = "1.1.1"
+kotlinxDatetime = "0.6.0"
 navigationCompose = "2.8.0-alpha10"
 kotlinSerialization = "1.7.3"
 junit = "4.13.2"
 kotlin = "2.1.0"
 koin = "4.0.0"
-foundationLayoutAndroid = "1.7.6"
+foundationLayoutAndroid = "1.7.7"
 playServicesAuth = "21.3.0"
 uiAndroid = "1.7.6"
 core = "1.15.0"
@@ -46,6 +47,7 @@ androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 jetbrains-compose-navigation = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref= "navigationCompose"}
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 
 # Koin

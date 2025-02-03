@@ -1,6 +1,6 @@
 package it.pierosilvestri.cmp.firebase.todo.data.repository
 
-import it.pierosilvestri.cmp.firebase.core.domain.models.Note
+import it.pierosilvestri.cmp.firebase.todo.domain.models.Note
 import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseFirestoreService
 import it.pierosilvestri.cmp.firebase.todo.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +15,10 @@ class TodoRepositoryImpl(
 
     override suspend fun addNote(note: Note) {
         firebaseFirestoreService.addNote(note)
+    }
+
+    override suspend fun updateNote(note: Note) {
+        firebaseFirestoreService.updateNote(note)
     }
 
 }

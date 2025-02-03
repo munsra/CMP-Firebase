@@ -3,10 +3,11 @@ package it.pierosilvestri.cmp.firebase.core.data.services
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 import it.pierosilvestri.cmp.firebase.core.data.models.firebase.FirebaseNote
-import it.pierosilvestri.cmp.firebase.core.domain.mappers.toNote
-import it.pierosilvestri.cmp.firebase.core.domain.models.Note
+import it.pierosilvestri.cmp.firebase.todo.domain.mappers.toNote
+import it.pierosilvestri.cmp.firebase.todo.domain.models.Note
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseFirestoreService
+import it.pierosilvestri.cmp.firebase.todo.domain.mappers.toFirebaseNote
 import kotlinx.coroutines.flow.flow
 
 class FirebaseFirestoreServiceImpl : FirebaseFirestoreService {
@@ -50,6 +51,7 @@ class FirebaseFirestoreServiceImpl : FirebaseFirestoreService {
     override suspend fun getNotesForUserFlow(userId: String) = flow {
         firestore.collection("notes")
             .where { "userId" equalTo userId }
+            .orderBy("createdAt")
             .snapshots.collect { querySnapshot ->
             val notes = querySnapshot.documents.map { documentSnapshot ->
                 documentSnapshot.data<FirebaseNote>().toNote()
@@ -64,8 +66,19 @@ class FirebaseFirestoreServiceImpl : FirebaseFirestoreService {
      */
     override suspend fun addNote(note: Note) {
         try {
-            val noteResponse = Firebase.firestore.collection("notes")
-                .add(note)
+            val noteResponse = firestore.collection("notes")
+                .document(note.id)
+                .set(note.toFirebaseNote())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override suspend fun updateNote(note: Note) {
+        try {
+            val noteResponse = firestore.collection("notes")
+                .document(note.id)
+                .set(note.toFirebaseNote())
         } catch (e: Exception) {
             e.printStackTrace()
         }

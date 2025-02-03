@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FirebaseNote(
     val uid: String,
+    val title: String?,
     val content: String,
     val createdAt: Timestamp,
     val isCompleted: Boolean,

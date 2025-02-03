@@ -2,8 +2,8 @@ package it.pierosilvestri.cmp.firebase.todo.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import it.pierosilvestri.cmp.firebase.core.domain.models.Note
 import it.pierosilvestri.cmp.firebase.login.domain.repository.AuthRepository
+import it.pierosilvestri.cmp.firebase.todo.domain.models.Note
 import it.pierosilvestri.cmp.firebase.todo.domain.repository.TodoRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,6 +11,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 class TodoScreenViewModel(
     private val authRepository: AuthRepository,
@@ -68,7 +74,44 @@ class TodoScreenViewModel(
         }
     }
 
-    fun addNote() {
+    fun openNewNoteDialog() {
+        _state.update {
+            it.copy(
+                isAddingNoteDialogVisible = true
+            )
+        }
+    }
 
+    fun dismissNewNoteDialog() {
+        _state.update {
+            it.copy(
+                isAddingNoteDialogVisible = false
+            )
+        }
+    }
+
+    @OptIn(ExperimentalUuidApi::class)
+    fun saveNewNote(title: String?, content: String) {
+        viewModelScope.launch {
+            // Get current date and time in UTC
+            val currentMoment = Clock.System.now()
+
+            todoRepository.addNote(
+                Note(
+                    id = Uuid.random().toString(),
+                    userId = currentUserId,
+                    title = title,
+                    content = content,
+                    isCompleted = false,
+                    createdAt = currentMoment.toEpochMilliseconds(),
+                )
+            )
+        }
+    }
+
+    fun onNoteClick(note: Note) {
+        viewModelScope.launch {
+            todoRepository.updateNote(note)
+        }
     }
 }
