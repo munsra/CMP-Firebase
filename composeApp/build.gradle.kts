@@ -32,8 +32,6 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.auth)
             implementation(libs.play.services.auth)
             implementation(libs.googleid)
             implementation(libs.koin.android)
