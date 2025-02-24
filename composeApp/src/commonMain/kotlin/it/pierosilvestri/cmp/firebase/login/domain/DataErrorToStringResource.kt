@@ -2,7 +2,7 @@ package it.pierosilvestri.cmp.firebase.login.domain
 
 import cmp_firebase.composeapp.generated.resources.Res
 import cmp_firebase.composeapp.generated.resources.*
-import it.pierosilvestri.cmp.firebase.core.presentation.UiText
+import it.pierosilvestri.core.presentation.UiText
 
 
 fun AuthError.toUiText(): UiText {
@@ -17,6 +17,7 @@ fun AuthError.toUiText(): UiText {
         AuthError.SignIn.EmptyFields -> Res.string.error_empty_fields
         AuthError.SignIn.InvalidCredentials -> Res.string.error_invalid_credentials
         AuthError.SignIn.NotVerified -> Res.string.error_user_not_verified
+        AuthError.SignIn.NoGoogleAccoundFound -> Res.string.error_invalid_google_credentials
 
         AuthError.SignUp.EmailAlreadyInUse -> Res.string.error_email_already_in_use
         AuthError.SignUp.WeakPassword -> Res.string.error_weak_password

@@ -1,6 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.domain.use_case
 
-import it.pierosilvestri.cmp.firebase.core.domain.Result
+import it.pierosilvestri.core.domain.Result
 import it.pierosilvestri.cmp.firebase.login.domain.ValidationError
 
 class ValidateEmailUseCase {

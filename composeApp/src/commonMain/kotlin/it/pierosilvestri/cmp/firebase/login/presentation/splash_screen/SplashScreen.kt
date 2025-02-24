@@ -11,8 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
-import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenEvent
+import it.pierosilvestri.core_ui.presentation.components.LoadingPopup
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -29,7 +28,6 @@ fun SplashScreenRoot(
             when (it) {
                 is SplashScreenEvent.GoToHomeScreen -> onUserLogged()
                 is SplashScreenEvent.GoToLoginScreen -> {
-                    println("MY_APP_TEST SPASHSCREEN user NOT aht. GoTo")
                     onUserNotLogged()
                 }
             }

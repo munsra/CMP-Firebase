@@ -1,6 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.presentation.signup_screen
 
-import it.pierosilvestri.cmp.firebase.core.presentation.UiText
+import it.pierosilvestri.core.presentation.UiText
 
 data class SignUpScreenState(
     val name: String? = "test1",

@@ -2,7 +2,7 @@ package it.pierosilvestri.cmp.firebase.login.presentation.login_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import it.pierosilvestri.cmp.firebase.core.domain.Result
+import it.pierosilvestri.core.domain.Result
 import it.pierosilvestri.cmp.firebase.login.domain.AuthError
 import it.pierosilvestri.cmp.firebase.login.domain.ValidationError
 import it.pierosilvestri.cmp.firebase.login.domain.toUiText
@@ -55,19 +55,19 @@ class LoginScreenViewModel(
                         is AuthError -> {
                             _state.value = _state.value.copy(
                                 isLoading = false,
-                                errorMessage = result.error.toUiText()
+                                errorMessage = (result.error as AuthError).toUiText()
                             )
                         }
                         is ValidationError.Email -> {
                             _state.value = _state.value.copy(
                                 isLoading = false,
-                                errorEmail = result.error.toUiText()
+                                errorEmail = (result.error as ValidationError).toUiText()
                             )
                         }
                         is ValidationError.Password -> {
                             _state.value = _state.value.copy(
                                 isLoading = false,
-                                errorPassword = result.error.toUiText()
+                                errorPassword = (result.error as  ValidationError.Password).toUiText()
                             )
                         }
                     }
@@ -83,7 +83,16 @@ class LoginScreenViewModel(
     }
 
     fun onLoginWithGoogle() {
-        TODO()
+        viewModelScope.launch {
+            _uiEvent.send(LoginScreenEvent.GoToHomeScreen)
+        }
+    }
+
+    fun onSignInError(authError: AuthError){
+        _state.value = _state.value.copy(
+            isLoading = false,
+            errorMessage = authError.toUiText(),
+        )
     }
 
     fun onDismissError() {

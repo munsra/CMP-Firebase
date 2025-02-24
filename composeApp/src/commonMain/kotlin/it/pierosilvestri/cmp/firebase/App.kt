@@ -5,14 +5,19 @@ import androidx.compose.runtime.*
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import it.pierosilvestri.cmp.firebase.app.Navigation
-import it.pierosilvestri.cmp.firebase.core_ui.theme.AppTheme
+import it.pierosilvestri.cmp.firebase.utils.ResourcesImpl
+import it.pierosilvestri.core_ui.presentation.theme.AppTheme
+import it.pierosilvestri.core.domain.compositionlocals.LocalResources
 
 @Composable
 @Preview
 fun App() {
-    AppTheme(
-        dynamicColor = false
-    ) {
-        Navigation()
+
+    CompositionLocalProvider(LocalResources provides ResourcesImpl()) {
+        AppTheme(
+            dynamicColor = false
+        ) {
+            Navigation()
+        }
     }
 }

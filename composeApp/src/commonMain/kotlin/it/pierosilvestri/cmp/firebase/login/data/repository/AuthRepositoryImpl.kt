@@ -1,6 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.data.repository
 
-import it.pierosilvestri.cmp.firebase.core.domain.Result
+import it.pierosilvestri.core.domain.Result
 import it.pierosilvestri.cmp.firebase.core.domain.models.User
 import it.pierosilvestri.cmp.firebase.login.data.mapper.toUser
 import it.pierosilvestri.cmp.firebase.core.domain.services.FirebaseAuthService

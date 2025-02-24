@@ -30,19 +30,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cmp_firebase.composeapp.generated.resources.Res
-import cmp_firebase.composeapp.generated.resources.google_brands_solid
-import cmp_firebase.composeapp.generated.resources.google_login_label
 import cmp_firebase.composeapp.generated.resources.social_image
-import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.ErrorPopup
-import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
-import it.pierosilvestri.cmp.firebase.login.presentation.components.SocialButton
+import it.pierosilvestri.core_ui.presentation.components.ErrorPopup
+import it.pierosilvestri.core_ui.presentation.components.LoadingPopup
+import it.pierosilvestri.cmp.firebase.login.domain.AuthError
+import it.pierosilvestri.firebase.signin.presentation.GoogleSignInButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -77,6 +75,7 @@ fun LoginScreenRoot(
                 LoginScreenAction.TogglePasswordVisibility -> viewModel.onTogglePasswordVisibility()
                 LoginScreenAction.DismissError -> viewModel.onDismissError()
                 LoginScreenAction.LoginWithGoogle -> viewModel.onLoginWithGoogle()
+                is LoginScreenAction.SignInWithGoogleError -> viewModel.onSignInError(action.error)
             }
         }
     )
@@ -105,7 +104,7 @@ fun LoginScreen(
             Column(
                 modifier = Modifier.weight(2f)
             ) {
-// Email Input Field
+                // Email Input Field
                 OutlinedTextField(
                     value = state.email ?: "",
                     onValueChange = {
@@ -187,13 +186,13 @@ fun LoginScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                SocialButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { onAction(LoginScreenAction.LoginWithGoogle) },
-                    iconResId = Res.drawable.google_brands_solid,
-                    tint = Color.Red,
-                    text = stringResource(Res.string.google_login_label)
-                )
+                GoogleSignInButton(onGoogleSignInResult = { googleUser ->
+                    when (googleUser) {
+                        null -> onAction(LoginScreenAction.SignInWithGoogleError(AuthError.SignIn.NoGoogleAccoundFound))
+                        else -> onAction(LoginScreenAction.LoginWithGoogle)
+                    }
+
+                })
             }
 
             if(state.isLoading){

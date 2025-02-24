@@ -39,10 +39,8 @@ class SplashScreenViewModel(
                 }
 
                 if(it != null && it.isAuthenticated) {
-                    println("Autorizzato")
                     _uiEvent.send(SplashScreenEvent.GoToHomeScreen)
                 }else {
-                    println("QUA ARRIVO")
                     _uiEvent.send(SplashScreenEvent.GoToLoginScreen)
                 }
             }

@@ -1,5 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.presentation.login_screen
 
+import it.pierosilvestri.cmp.firebase.login.domain.AuthError
 
 sealed interface LoginScreenAction {
     data class EmailChanged(val email: String) : LoginScreenAction
@@ -9,4 +10,5 @@ sealed interface LoginScreenAction {
     object SignUp : LoginScreenAction
     object DismissError: LoginScreenAction
     object LoginWithGoogle : LoginScreenAction
+    data class SignInWithGoogleError(val error: AuthError) : LoginScreenAction
 }

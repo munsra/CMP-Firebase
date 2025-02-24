@@ -25,8 +25,8 @@ import cmp_firebase.composeapp.generated.resources.Res
 import cmp_firebase.composeapp.generated.resources.error_dialog_title
 import cmp_firebase.composeapp.generated.resources.sign_up_success_dialog_message
 import cmp_firebase.composeapp.generated.resources.sign_up_success_dialog_title
-import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.ErrorPopup
-import it.pierosilvestri.cmp.firebase.core_ui.presentation.components.LoadingPopup
+import it.pierosilvestri.core_ui.presentation.components.ErrorPopup
+import it.pierosilvestri.core_ui.presentation.components.LoadingPopup
 import it.pierosilvestri.cmp.firebase.login.presentation.signup_screen.SignUpScreenAction
 import it.pierosilvestri.cmp.firebase.login.presentation.signup_screen.SignUpScreenEvent
 import it.pierosilvestri.cmp.firebase.login.presentation.signup_screen.SignUpScreenState

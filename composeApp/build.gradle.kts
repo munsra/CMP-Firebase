@@ -15,7 +15,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -30,14 +30,23 @@ kotlin {
     sourceSets {
         
         androidMain.dependencies {
+            implementation(project(":core_ui"))
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.play.services.auth)
             implementation(libs.googleid)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            implementation(libs.androidx.credentials)
+            implementation(libs.androidx.credentials.play.services.auth)
+            implementation(libs.googleid)
+
         }
         commonMain.dependencies {
+            implementation(project(":core"))
+            implementation(project(":core_ui"))
+            implementation(project(":signin"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

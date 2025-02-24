@@ -6,7 +6,7 @@ import dev.gitlive.firebase.auth.FirebaseAuthEmailException
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
 import dev.gitlive.firebase.auth.FirebaseAuthWeakPasswordException
-import it.pierosilvestri.cmp.firebase.core.domain.Error
+import it.pierosilvestri.core.domain.Error
 
 sealed interface AuthError: Error {
 
@@ -22,7 +22,8 @@ sealed interface AuthError: Error {
         UnknownError,
         EmptyFields,
         InvalidCredentials,
-        NotVerified
+        NotVerified,
+        NoGoogleAccoundFound
     }
 
     enum class SignUp : AuthError {

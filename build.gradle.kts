@@ -8,4 +8,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.jetbrains.kotlin.serialization) apply false
     alias(libs.plugins.firebase.google.services) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
+    alias(libs.plugins.kotlinCocoapods) apply false
 }

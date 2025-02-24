@@ -1,6 +1,6 @@
 package it.pierosilvestri.cmp.firebase.login.presentation.login_screen
 
-import it.pierosilvestri.cmp.firebase.core.presentation.UiText
+import it.pierosilvestri.core.presentation.UiText
 
 data class LoginScreenState(
     val email: String? = "munsra@gmail.com",
