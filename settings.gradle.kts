@@ -29,6 +29,9 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-include(":signin")
 include(":core")
 include(":core_ui")
+include(":login")
+include(":home")
+include(":auth")
+include(":todo")

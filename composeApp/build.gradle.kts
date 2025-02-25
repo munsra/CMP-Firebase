@@ -30,26 +30,24 @@ kotlin {
     sourceSets {
         
         androidMain.dependencies {
-            implementation(project(":core_ui"))
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.auth)
+
             implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.play.services.auth)
-            implementation(libs.googleid)
+
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.credentials)
-            implementation(libs.androidx.credentials.play.services.auth)
-            implementation(libs.googleid)
 
         }
         commonMain.dependencies {
             implementation(project(":core"))
             implementation(project(":core_ui"))
-            implementation(project(":signin"))
+            implementation(project(":auth"))
+            implementation(project(":home"))
+            implementation(project(":login"))
+            implementation(project(":todo"))
 
             implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
             implementation(compose.materialIconsExtended)
             implementation(compose.ui)
             implementation(compose.components.resources)
@@ -57,16 +55,10 @@ kotlin {
 
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime.compose)
+
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.kotlinx.datetime)
             api(libs.koin.core)
-
-            implementation(libs.gitlive.firebase.auth)
-            implementation(libs.gitlive.firebase.firestore)
-
         }
     }
 }

@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import it.pierosilvestri.cmp.firebase.home.presentation.HomeScreenRoot
-import it.pierosilvestri.cmp.firebase.login.presentation.login_screen.LoginScreenRoot
-import it.pierosilvestri.cmp.firebase.login.presentation.splash_screen.SplashScreenRoot
-import it.pierosilvestri.cmp.firebase.todo.presentation.TodoScreenRoot
+import it.pierosilvestri.todo.presentation.TodoScreenRoot
+import it.pierosilvestri.home.presentation.HomeScreenRoot
+import it.pierosilvestri.login.presentation.login_screen.LoginScreenRoot
+import it.pierosilvestri.login.presentation.splash_screen.SplashScreenRoot
 
 @Composable
 fun Navigation() {
