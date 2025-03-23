@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.firebase.google.services)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -16,13 +17,22 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "16.0"
+
+        podfile = project.file("../iosApp/Podfile")
+
+        pod("GoogleSignIn")
+
+        framework {
+            baseName = "composeApp"
             isStatic = true
         }
     }

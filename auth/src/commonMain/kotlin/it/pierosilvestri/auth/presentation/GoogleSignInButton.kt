@@ -42,12 +42,11 @@ fun GoogleSignInButton(
                     coroutineScope.launch {
                         val googleUser = googleAuthUiProvider.signIn()
                         if(googleUser != null){
-                            Firebase.auth.signInWithCredential(
-                                dev.gitlive.firebase.auth.GoogleAuthProvider.credential(
-                                    googleUser.token,
-                                    null
-                                )
+                            val credential = dev.gitlive.firebase.auth.GoogleAuthProvider.credential(
+                                googleUser.token,
+                                googleUser.token,
                             )
+                            Firebase.auth.signInWithCredential(credential)
                         }
                         onGoogleSignInResult(googleUser)
                     }

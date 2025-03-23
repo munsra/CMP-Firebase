@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinCocoapods)
+
 }
 
 kotlin {
@@ -33,25 +34,9 @@ kotlin {
 // A step-by-step guide on how to include this library in an XCode
 // project can be found here:
 // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "authKit"
-
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -59,14 +44,14 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "16.0"
 
-        noPodspec()
-
-        framework {
-            baseName = "signin"
-            isStatic = true
-        }
+        podfile = project.file("../iosApp/Podfile")
 
         pod("GoogleSignIn")
+
+        framework {
+            baseName = "auth"
+            isStatic = true
+        }
     }
 
 // Source set declarations.
